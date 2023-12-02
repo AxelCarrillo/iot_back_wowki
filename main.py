@@ -35,7 +35,6 @@ async def root():
 
 @app.get("/dispositivos")
 async def get_all():
-    """Obtiene todos los contactos."""
     c = conn.cursor()
     c.execute('SELECT * FROM dispositivos;')
     response = []
@@ -45,7 +44,7 @@ async def get_all():
     return response
 
 @app.get("/dispositivos/{id}")
-async def get_dispositivo(id: int):
+async def obtener_dispositivo(id: int):
     """Obtiene un contacto por su email."""
     # Consulta el contacto por su email
     c = conn.cursor()
@@ -56,9 +55,7 @@ async def get_dispositivo(id: int):
     return dispositivo
 
 @app.put("/dispositivos/{id}")
-async def get_dispositivo(id: int, dispositivo: DispositivoPUT):
-    """Obtiene un contacto por su email."""
-    # Consulta el contacto por su email
+async def actualizar_dispositivo(id: int, dispositivo: DispositivoPUT):
     c = conn.cursor()
     c.execute('UPDATE dispositivos SET valor = ? WHERE id = ?;',
               (dispositivo.valor,id))
